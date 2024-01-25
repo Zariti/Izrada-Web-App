@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Hello {{username}}!</h1>
+<h2>Your role is {{role}}</h2>
+{% if role == 'prof' %}
+    <a href="{% url 'predmetiOdProfesora' user_id=user_id %}">Predmeti profesora</a> &nbsp &nbsp 
+    <a href="{% url 'upisniListoviAdm' %}">Upisni listovi</a> &nbsp &nbsp
+{% endif %}
+
+{% if role == 'adm' %}
+    <a href="{% url 'predmetiLista' %}">Lista predmeta</a>  &nbsp &nbsp 
+    <a href="{% url 'dodajPredmet' %}">Dodaj novi predmet</a>   &nbsp &nbsp 
+    <a href="{% url 'dajPredmetProfesoru' %}">Dodijeli predmet profesoru</a>    &nbsp &nbsp 
+    <a href="{% url 'studentiLista' %}">Lista studenata</a> &nbsp &nbsp 
+    <a href="{% url 'dodajStudenta' %}">Dodaj studenta</a>  &nbsp &nbsp 
+    <a href="{% url 'profesoriLista' %}">Lista profesora</a> &nbsp &nbsp 
+    <a href="{% url 'dajPredmetProfesoru' %}">Dodijeli predmet profesoru</a> &nbsp &nbsp 
+    <a href="{% url 'dodajProfesora' %}">Dodaj profesora</a> &nbsp &nbsp
+    <a href="{% url 'upisniListoviAdm' %}">Upisni listovi</a> &nbsp &nbsp
+{% endif %}
+
+
+{% if role == 'stu' %}
+    <a href="{% url 'upisniList' user_id=user_id %}">Upisni List</a> &nbsp &nbsp
+    <a href="{% url 'filtriraj_predmete' %}">Filtriraj predmete</a>
+{% endif %}
+<a href="{% url 'logout' %}">Logout</a>
+{% endblock %}

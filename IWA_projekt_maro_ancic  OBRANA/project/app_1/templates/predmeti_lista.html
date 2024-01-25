@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for predmet in predmeti %}
+{{predmet.name}}
+{{predmet.kod}}
+<a href="{% url 'editPredmeta' predmet.id %}">Edit</a>    &nbsp 
+<a href="{% url 'studentiNaPredmetu' predmet.id %}">Vidi popis studenata</a>    &nbsp  
+<hr>
+{% endfor %}
+<a href="{% url 'dodajPredmet' %}">Dodaj predmet</a> &nbsp
+<a href="{% url 'home' user_id %}">Natrag na home</a>
+{% endblock %}

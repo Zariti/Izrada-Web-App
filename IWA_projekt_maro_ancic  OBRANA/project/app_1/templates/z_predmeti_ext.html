@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for dt in data %}
+    {{dt.predmet}} 
+    | Ukupno polozenih: {{dt.br_ukupno_polozenih}} 
+    | Redovnih polozenih: {{dt.br_red_polozenih}} 
+    | Izvanrednih polozenih: {{dt.br_izv_polozenih}} 
+    <a href="{% url 'detaljiExt' predmet_id=dt.predmet.id %}">Detalji_ext</a>
+    <hr>
+{% endfor %}
+{% endblock %}

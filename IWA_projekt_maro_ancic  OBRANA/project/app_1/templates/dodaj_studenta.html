@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="POST">
+{{form}}
+{% if form.errors.role %}
+<p class="errors">{{form.errors.role}}</p>
+{% endif %}
+{% csrf_token %}
+<input type="submit" value="Dodaj">
+</form>
+{% endblock %}

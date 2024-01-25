@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+
+
+
+{% block content %}
+<h1>Neupisani predmeti:</h1>
+{% for predmet in neupisani_predmeti %}
+    {{predmet.name}}
+    {% if student.status == 'red' %}
+        | Semestar: {{predmet.sem_red}}
+    {% endif %}
+
+    {% if student.status == 'izv' %}
+        | Semestar: {{predmet.sem_izv}}
+    {% endif %}
+    <a href="{% url 'upisiPredmet' user_id=user_id predmet_id=predmet.id %}">Upiši</a>
+    <hr>
+{% endfor %}
+<hr>
+<br>
+<h1>Upisani predmeti:</h1>
+{% for predmet in upisani_predmeti %}
+    {{predmet.name}}
+    {% if student.status == 'red' %}
+        | Semestar: {{predmet.sem_red}}
+    {% endif %}
+    {% if student.status == 'izv' %}
+        | Semestar: {{predmet.sem_izv}}
+    {% endif %}
+
+    {% if user_obj_logirani.role == 'stu' %}
+    
+        {% if predmet.id in polozeni_predmeti %}
+            [Polozen] &#10004;
+        {% elif predmet.id in nepolozeni_predmeti %}
+            [Izgubio potpis] &#x2717;
+        {% else %}
+            <a href="{% url 'ukloniPredmet' user_id=user_id predmet_id=predmet.id %}">Ukloni</a> &nbsp
+        {% endif %}
+    
+    {% elif user_obj_logirani.role == 'adm' %} 
+        <a href="{% url 'ukloniPredmet' user_id=user_id predmet_id=predmet.id %}">Ukloni</a> &nbsp
+        <a href="{% url 'polozioPredmet' user_id=user_id predmet_id=predmet.id %}">Polozio</a> &nbsp 
+        <a href="{% url 'izgubioPredmet' user_id=user_id predmet_id=predmet.id %}">Izgubio potpis</a> &nbsp 
+
+        {% if predmet.id in polozeni_predmeti %}
+            [Polozen] &#10004;
+        {% endif %}
+        {% if predmet.id in nepolozeni_predmeti %}
+            [Izgubio potpis] &#x2717;
+        {% endif %}
+
+    {% else %}  <!-- if the role is professor -->
+
+
+        {% if predmet.id in polozeni_predmeti %}
+            [Polozen] &#10004;
+        {% elif predmet.id in nepolozeni_predmeti %}
+            [Izgubio potpis] &#x2717;
+        {% else %}
+            <a href="{% url 'ukloniPredmet' user_id=user_id predmet_id=predmet.id %}">Ukloni</a> &nbsp;
+            <a href="{% url 'polozioPredmet' user_id=user_id predmet_id=predmet.id %}">Polozio</a> &nbsp; 
+            <a href="{% url 'izgubioPredmet' user_id=user_id predmet_id=predmet.id %}">Izgubio potpis</a> &nbsp; 
+        {% endif %}
+
+
+
+    {% endif %}
+
+<a href="{% url 'stats' predmet.id %}">Stats</a>
+
+<hr>
+{% endfor %}
+
+{% if user_obj_logirani.role == 'adm' or user_obj_logirani.role == 'prof' %} <!--u slucaju da smo logirani kao admin ili prof i pristupamo tudim upisnim listovima-->
+    <a href="{% url 'home' user_obj_logirani.id %}">Natrag na home [ADMIN / PROFESOR]</a>
+{% else %} <!--u slucaju da smo logirani kao student kojem upisni list pripada-->
+    <a href="{% url 'home' user_id %}">Natrag na home</a>
+{% endif %}
+
+{% endblock %}

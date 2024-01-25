@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for student in lst_red %}
+{{student.username}}
+{% endfor %}
+<hr>
+{% for student in lst_izv %}
+{{student.username}}
+{% endfor %}
+
+{% endblock %}

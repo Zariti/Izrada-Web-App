@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for student in studenti %}
+{{student.username}}
+{{student.email}}
+<hr>
+{% endfor %}
+{% endblock %}

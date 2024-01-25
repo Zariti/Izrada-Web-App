@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for predmet in predmeti %}
+{{predmet.name}}
+<a href="{% url 'studentiNaPredmetu' predmet.id %}">Popis svih studenata predmeta</a> &nbsp 
+<a href="{% url 'studKojiSuUpisali' predmet.id %}">Studenti koji su upisali predmet</a> &nbsp 
+<a href="{% url 'studKojiSuPolozili' predmet.id %}">Studenti koji su polozili predmet</a> &nbsp 
+<a href="{% url 'studKojiSuIzgPotp' predmet.id %}">Studenti koji su izgubili potpis</a> &nbsp 
+
+<hr>
+{% endfor %}
+<a href="{% url 'home' user_id=user_id %}">Natrag</a>
+{% endblock %}

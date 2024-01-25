@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action="{% url 'filtriraj_predmete' %}" method="POST">
+    Unesi broj bodova: <input type="number" name="number" value="">
+    Unesi semestar: <input type="number" name="semestar" value="">
+    {% csrf_token %}
+    <input type="submit" value="Filtriraj">
+</form>
+{% endblock %}

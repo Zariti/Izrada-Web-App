@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for student in studenti %}
+    {{student.username}}  
+    {{student.email}}
+    <a href="{% url 'editStudenta' student.id %}">Edit</a>
+    {% if student.status == 'red' %}
+        <a href="{% url 'brPol43' student.id %}">Broj polozenih vecih od 4 ects</a>
+    {% endif %}
+    {% if student.status == 'izv' %}
+        <a href="{% url 'brPol43' student.id %}">Broj polozenih vecih od 3 ects</a>
+    {% endif %}
+    <hr>
+{% endfor %}
+<a href="{% url 'dodajStudenta' %}">Dodaj studenta</a>
+<a href="{% url 'home' user_id %}">Natrag na home</a>
+{% endblock %}

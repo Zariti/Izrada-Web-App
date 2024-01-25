@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{predmet.name}}</h1>
+{% for student in studenti_objekti %}
+{{student.username}}
+{{student.email}}
+<hr>
+{% endfor %}
+<a href="{% url 'predmetiLista' %}">Natrag</a>
+{% endblock %}

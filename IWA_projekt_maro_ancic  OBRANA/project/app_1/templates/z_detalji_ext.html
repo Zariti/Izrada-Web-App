@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+Redovni: 
+{% for red in redovni %}
+{{red}}
+{% endfor %} 
+<br>
+Izvanredni: 
+{% for izv in izvanredni %}
+{{izv}}
+{% endfor %}
+{% endblock %}

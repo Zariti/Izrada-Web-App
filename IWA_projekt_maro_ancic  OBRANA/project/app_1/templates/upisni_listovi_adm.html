@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for student in studenti %}
+    {{student.username}}    
+    {{student.email}}   
+    <a href="{% url 'upisniList' student.id %}">Upisni list studenta</a>
+    <hr>
+{% endfor %}
+<a href="{% url 'home' user_id %}">Natrag na home</a>
+{% endblock %}

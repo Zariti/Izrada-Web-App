@@ -1,0 +1,15 @@
+<!-- Prikaz postojećih upisa -->
+<h2>Upisani predmeti:</h2>
+<ul>
+  {% for upis in upisi %}
+    <li>{{ upis.predmet_id.naziv }} - {{ upis.status }}</li>
+  {% endfor %}
+</ul>
+
+<!-- Forma za unos novog upisa -->
+<h2>Dodaj novi upis:</h2>
+<form method="POST" action="{% url 'dodaj_upis' %}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Upiši</button>
+</form>
